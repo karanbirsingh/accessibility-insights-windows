@@ -191,7 +191,7 @@ namespace AccessibilityInsights.Modes
                                     {
                                         ScreenShotAction.CaptureScreenShot(ecId);
                                         Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
-                                        Application.Current.MainWindow.Visibility = Visibility.Visible;
+                                        //Application.Current.MainWindow.Visibility = Visibility.Visible;
                                     })).Wait();
                                 }
                             }
