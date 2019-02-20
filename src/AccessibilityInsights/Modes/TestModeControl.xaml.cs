@@ -179,8 +179,11 @@ namespace AccessibilityInsights.Modes
                                 }
                                 else
                                 {
-                                    //Application.Current.MainWindow.WindowStyle = WindowStyle.ToolWindow;
-                                    Application.Current.MainWindow.Visibility = Visibility.Hidden;
+                                    this.Dispatcher.BeginInvoke(DispatcherPriority.Send, new Action(() =>
+                                    {
+                                        Application.Current.MainWindow.WindowStyle = WindowStyle.ToolWindow;
+                                        Application.Current.MainWindow.Visibility = Visibility.Hidden;
+                                    })).Wait();
 
                                     HighlightAction.GetDefaultInstance().IsEnabled = false;
 
