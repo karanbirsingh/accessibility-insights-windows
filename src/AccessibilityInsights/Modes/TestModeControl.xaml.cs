@@ -179,7 +179,7 @@ namespace AccessibilityInsights.Modes
                                 }
                                 else
                                 {
-                                    Application.Current.MainWindow.WindowStyle = WindowStyle.ToolWindow;
+                                    //Application.Current.MainWindow.WindowStyle = WindowStyle.ToolWindow;
                                     Application.Current.MainWindow.Visibility = Visibility.Hidden;
 
                                     HighlightAction.GetDefaultInstance().IsEnabled = false;
@@ -187,8 +187,8 @@ namespace AccessibilityInsights.Modes
                                     this.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
                                     {
                                         ScreenShotAction.CaptureScreenShot(ecId);
-                                        Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
-                                        Application.Current.MainWindow.Visibility = Visibility.Visible;
+                                        //Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                                        //Application.Current.MainWindow.Visibility = Visibility.Visible;
                                     })).Wait();
                                 }
                             }
@@ -235,6 +235,8 @@ namespace AccessibilityInsights.Modes
                     Application.Current.Dispatcher.Invoke(() => {
                         this.ctrlProgressRing.Deactivate();
                         this.tbiAutomatedChecks.Focus();
+                        //Application.Current.MainWindow.InvalidateVisual();
+                        //Application.Current.MainWindow.Opacity = 1;
                     });
                 }
             }
@@ -250,6 +252,10 @@ namespace AccessibilityInsights.Modes
                 {
                     MainWin.SetCurrentViewAndUpdateUI(TestView.AutomatedTestResults);
                 }
+                Application.Current.MainWindow.InvalidateVisual();
+                Application.Current.MainWindow.UpdateLayout();
+                Application.Current.MainWindow.Visibility = Visibility.Visible;
+                Application.Current.MainWindow.Opacity = 1;
             });
         }
 
