@@ -43,10 +43,6 @@ namespace AccessibilityInsights.SharedUx.FileBug
 
         public static Task RestoreConfigurationAsync(string serializedConfig)
         {
-            // This is the correct version. Uncomment and make sure it plays well
-            //if (IsEnabled && IssueFilingManager.SelectedIssueReporterGuid != null)
-            //    return IssueReporter.RestoreConfigurationAsync(serializedConfig);
-
             if (IsEnabled && IssueReporterManager.SelectedIssueReporterGuid != null)
                 return IssueReporter.RestoreConfigurationAsync(serializedConfig);
             return Task.CompletedTask;

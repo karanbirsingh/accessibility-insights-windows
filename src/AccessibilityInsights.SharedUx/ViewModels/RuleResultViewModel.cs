@@ -60,11 +60,11 @@ namespace AccessibilityInsights.SharedUx.ViewModels
         {
             get
             {
-                return RuleResult.BugId;
+                return RuleResult.IssueDisplayString;
             }
             set
             {
-                RuleResult.BugId = value;
+                RuleResult.IssueDisplayString = value;
                 OnPropertyChanged(nameof(BugIdString));
             }
         }

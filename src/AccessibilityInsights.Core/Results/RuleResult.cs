@@ -17,7 +17,7 @@ namespace AccessibilityInsights.Core.Results
         /// <summary>
         /// Returns the bug id, null if no bug id has been associated
         /// </summary>
-        public int? BugId { get; set; }
+        public string IssueDisplayString { get; set; }
 
 #pragma warning disable CA2227 // Collection properties should be read only
         /// <summary>

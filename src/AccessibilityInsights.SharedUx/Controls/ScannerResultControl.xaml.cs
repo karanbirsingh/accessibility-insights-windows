@@ -4,6 +4,7 @@ using AccessibilityInsights.Actions.Enums;
 using AccessibilityInsights.Core.Bases;
 using AccessibilityInsights.Core.Results;
 using AccessibilityInsights.Desktop.Telemetry;
+using AccessibilityInsights.Extensions.Interfaces.IssueReporting;
 using AccessibilityInsights.SharedUx.Controls.CustomControls;
 using AccessibilityInsights.SharedUx.Dialogs;
 using AccessibilityInsights.SharedUx.FileBug;
@@ -275,24 +276,21 @@ namespace AccessibilityInsights.SharedUx.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private /*async*/ void btnFileBug_Click(object sender, RoutedEventArgs e)
+        private void btnFileBug_Click(object sender, RoutedEventArgs e)
         {
             var vm = ((Button)sender).Tag as ScanListViewItemViewModel;
-            if (vm.BugId.HasValue)
+            if (vm.IssueLink != null)
             {
                 // Bug already filed, open it in a new window
                 try
                 {
-                    // TO DO ASKALBHO UNCOMMENT AND REPLACE with appropriate stuff
-                    //var bugUri = await BugReporter.GetExistingBugUriAsync(vm.BugId.Value).ConfigureAwait(true);
-                    var bugUri = new Uri("");
-                    System.Diagnostics.Process.Start(bugUri.ToString());
+                    System.Diagnostics.Process.Start(vm.IssueLink.OriginalString);
                 }
                 catch (Exception ex)
                 {
                     // Happens when bug is deleted, message describes that work item doesn't exist / possible permission issue
                     MessageDialog.Show(ex.InnerException?.Message);
-                    vm.BugId = null;
+                    vm.IssueDisplayString = null;
                 }
             }
             else
@@ -305,15 +303,17 @@ namespace AccessibilityInsights.SharedUx.Controls
 
                 // TODO: figuring out whether a team project has been chosen should not require
                 //  looking at the most recent connection, this should be broken out
-                if (BugReporter.IsConnected && Configuration.SavedConnection?.IsPopulated == true)
+                if (BugReporter.IsConnected)
                 {
-                    Action<int> updateZoom = (int x) => Configuration.ZoomLevel = x;
-                    (int? bugId, string newBugId) = FileBugAction.FileNewBug(vm.GetBugInformation(), Configuration.SavedConnection, Configuration.AlwaysOnTop, Configuration.ZoomLevel, updateZoom);
+                    IssueInformation issueInformation = vm.GetIssueInformation();
+                    FileBugAction.AttachIssueData(issueInformation, this.ElementContext.Id, this.SelectedElement.BoundingRectangle,
+            this.SelectedElement.UniqueId);
+                    (int? bugId, string newBugId) = FileBugAction.FileNewBug(, Configuration.SavedConnection, Configuration.AlwaysOnTop, Configuration.ZoomLevel, updateZoom);
 
-                    vm.BugId = bugId;
+                    vm.IssueDisplayString = bugId;
 
                     // Check whether bug was filed once dialog closed & process accordingly
-                    if (vm.BugId.HasValue)
+                    if (vm.IssueDisplayString.HasValue)
                     {
                         vm.LoadingVisibility = Visibility.Visible;
                         try
