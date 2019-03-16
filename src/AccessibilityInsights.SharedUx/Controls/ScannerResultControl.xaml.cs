@@ -14,6 +14,7 @@ using AccessibilityInsights.SharedUx.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -290,7 +291,7 @@ namespace AccessibilityInsights.SharedUx.Controls
                 {
                     // Happens when bug is deleted, message describes that work item doesn't exist / possible permission issue
                     MessageDialog.Show(ex.InnerException?.Message);
-                    vm.IssueDisplayString = null;
+                    vm.IssueDisplayText = null;
                 }
             }
             else
@@ -306,32 +307,14 @@ namespace AccessibilityInsights.SharedUx.Controls
                 if (BugReporter.IsConnected)
                 {
                     IssueInformation issueInformation = vm.GetIssueInformation();
-                    FileBugAction.AttachIssueData(issueInformation, this.ElementContext.Id, this.SelectedElement.BoundingRectangle,
-            this.SelectedElement.UniqueId);
-                    (int? bugId, string newBugId) = FileBugAction.FileNewBug(, Configuration.SavedConnection, Configuration.AlwaysOnTop, Configuration.ZoomLevel, updateZoom);
-
-                    vm.IssueDisplayString = bugId;
-
-                    // Check whether bug was filed once dialog closed & process accordingly
-                    if (vm.IssueDisplayString.HasValue)
+                    FileBugAction.AttachIssueData(issueInformation, this.EcId, vm.Element.BoundingRectangle, vm.Element.UniqueId);
+                    IIssueResult issueResult = FileBugAction.FileIssueAsync(issueInformation);
+                    if (issueResult != null)
                     {
-                        vm.LoadingVisibility = Visibility.Visible;
-                        try
-                        {
-                            //var success = await FileBugAction.AttachIssueData(this.EcId, vm.Element.BoundingRectangle, 
-                            //    vm.Element.UniqueId, newBugId, vm.BugId.Value).ConfigureAwait(false);
-                            //if (!success)
-                            //{
-                            //    MessageDialog.Show(Properties.Resources.ScannerResultControl_btnFileBug_Click_There_was_an_error_identifying_the_created_bug_This_may_occur_if_the_ID_used_to_create_the_bug_is_removed_from_its_AzureDevOps_description_Attachments_have_not_been_uploaded);
-                            //    vm.BugId = null;
-                            //}
-                            //vm.LoadingVisibility = Visibility.Collapsed;
-                        }
-                        catch (Exception)
-                        {
-                            vm.LoadingVisibility = Visibility.Collapsed;
-                        }
+                        vm.IssueDisplayText = issueResult.DisplayText;
+                        vm.IssueLink = issueResult.IssueLink;
                     }
+                    File.Delete(issueInformation.TestFileName);
                 }
                 else
                 {

@@ -104,11 +104,6 @@ namespace AccessibilityInsights.SharedUx.ViewModels
         /// </summary>
         public A11yElement Element { get; private set; }
 
-        /// <summary>
-        /// Used to store the issue link.
-        /// </summary>
-        public Uri IssueLink { get; set; }
-
         private System.Windows.Visibility loadingVisibility;
         /// <summary>
         /// Attachment loading
@@ -129,16 +124,32 @@ namespace AccessibilityInsights.SharedUx.ViewModels
         /// <summary>
         /// Bug id of this rule
         /// </summary>
-        public string IssueDisplayString
+        public string IssueDisplayText
         {
             get
             {
-                return RR.IssueDisplayString;
+                return RR.IssueDisplayText;
             }
             set
             {
-                RR.IssueDisplayString = value;
-                OnPropertyChanged(nameof(IssueDisplayString));
+                RR.IssueDisplayText = value;
+                OnPropertyChanged(nameof(IssueDisplayText));
+            }
+        }
+
+        /// <summary>
+        /// Used to store the issue link.
+        /// </summary>
+        public Uri IssueLink
+        {
+            get
+            {
+                return RR.IssueLink;
+            }
+            set
+            {
+                RR.IssueLink = value;
+                OnPropertyChanged(nameof(IssueLink));
             }
         }
 
