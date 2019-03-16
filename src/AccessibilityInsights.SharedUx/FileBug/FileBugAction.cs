@@ -129,58 +129,61 @@ namespace AccessibilityInsights.SharedUx.FileBug
         /// <returns>Success or failure</returns>
         private static Task<bool> AttachBugDataInternal(Guid ecId, Rectangle? rect, string a11yBugId, int bugId, string snapshotFileName)
         {
+            // Attaches snapshot file using filename passed in
+            // Creates a screenshot, saves it and attaches it to the bug
+            // Deletes both files
             var a = ecId;
             var b = rect;
             var c = a11yBugId;
             var d = bugId;
             var e = snapshotFileName;
-            //var imageFileName = GetTempFileName(".png");
-            //var filedBugReproSteps = await BugReporter.GetExistingBugDescriptionAsync(bugId).ConfigureAwait(false);
+            var imageFileName = GetTempFileName(".png");
+            var filedBugReproSteps = await BugReporter.GetExistingBugDescriptionAsync(bugId).ConfigureAwait(false);
 
-            //if (GuidsMatchInReproSteps(a11yBugId, filedBugReproSteps))
-            //{
-            //    int? attachmentResponse = null;
-            //    const int maxAttempts = 2;
+            if (GuidsMatchInReproSteps(a11yBugId, filedBugReproSteps))
+            {
+                int? attachmentResponse = null;
+                const int maxAttempts = 2;
 
-            //    // Attempt to attach the results file twice
-            //    for (int attempts = 0; attempts < maxAttempts; attempts++)
-            //    {
-            //        try
-            //        {
-            //            attachmentResponse = await BugReporter.AttachTestResultToBugAsync(snapshotFileName, bugId).ConfigureAwait(false);
-            //            break;
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            if (!ex.IsTransient()) throw;
-            //        }
-            //    }
+                // Attempt to attach the results file twice
+                for (int attempts = 0; attempts < maxAttempts; attempts++)
+                {
+                    try
+                    {
+                        attachmentResponse = await BugReporter.AttachTestResultToBugAsync(snapshotFileName, bugId).ConfigureAwait(false);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!ex.IsTransient()) throw;
+                    }
+                }
 
-            //    // Save local screenshot for HTML preview in browser
-            //    GetScreenShotForBugDescription(ecId, rect)?.Save(imageFileName);
+                // Save local screenshot for HTML preview in browser
+                GetScreenShotForBugDescription(ecId, rect)?.Save(imageFileName);
 
-            //    var htmlDescription = "";
+                var htmlDescription = "";
 
-            //    if (imageFileName != null)
-            //    {
-            //        var imgUrl = await BugReporter.AttachScreenshotToBugAsync(imageFileName, bugId).ConfigureAwait(false);
-            //        htmlDescription = $"<img src=\"{imgUrl}\" alt=\"screenshot\"></img>";
-            //    }
+                if (imageFileName != null)
+                {
+                    var imgUrl = await BugReporter.AttachScreenshotToBugAsync(imageFileName, bugId).ConfigureAwait(false);
+                    htmlDescription = $"<img src=\"{imgUrl}\" alt=\"screenshot\"></img>";
+                }
 
-            //    var scrubbedHTML = RemoveInternalHTML(filedBugReproSteps, a11yBugId) + htmlDescription;
-            //    await BugReporter.ReplaceBugDescriptionAsync(scrubbedHTML, bugId).ConfigureAwait(false);
-            //    File.Delete(snapshotFileName);
-            //    if (imageFileName != null)
-            //    {
-            //        File.Delete(imageFileName);
-            //    }
+                var scrubbedHTML = RemoveInternalHTML(filedBugReproSteps, a11yBugId) + htmlDescription;
+                await BugReporter.ReplaceBugDescriptionAsync(scrubbedHTML, bugId).ConfigureAwait(false);
+                File.Delete(snapshotFileName);
+                if (imageFileName != null)
+                {
+                    File.Delete(imageFileName);
+                }
 
-            //    // if the bug failed to attach, return false
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+                // if the bug failed to attach, return false
+            }
+            else
+            {
+                return false;
+            }
             return Task.FromResult(false);
         }
 
