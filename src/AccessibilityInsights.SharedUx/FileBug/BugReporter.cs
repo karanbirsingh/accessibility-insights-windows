@@ -87,8 +87,11 @@ namespace AccessibilityInsights.SharedUx.FileBug
 
         public static IIssueResult FileIssueAsync(IssueInformation issueInformation)
         {
+            // I know this blocks the current thread. However there is no way for us to make sure that 
             if (IsEnabled && IsConnected) {
-                return (IssueReporter.FileIssueAsync(issueInformation)).Result;
+                // Coding to the agreement that FileIssueAsync will return a kicked off task. 
+                // A little unclear on whether this will block the man thread
+                return IssueReporter.FileIssueAsync(issueInformation).Result;
             }
             return null;
         }

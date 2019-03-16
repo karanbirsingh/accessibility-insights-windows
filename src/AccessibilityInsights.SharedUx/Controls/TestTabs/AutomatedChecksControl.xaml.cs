@@ -1010,21 +1010,21 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
                         {
                             var sc = DispatcherSynchronizationContext.Current;
                             vm.LoadingVisibility = Visibility.Visible;
-                            var task = FileBugAction.AttachBugData(this.ElementContext.Id, vm.Element.BoundingRectangle, vm.Element.UniqueId, newBugId, vm.BugId.Value);
+                            //var task = FileBugAction.AttachIssueData(this.ElementContext.Id, vm.Element.BoundingRectangle, vm.Element.UniqueId, newBugId, vm.BugId.Value);
 
 #pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
-                            task.ContinueWith(delegate
-                            {
-                                sc.Post(delegate {
-                                    vm.LoadingVisibility = Visibility.Collapsed;
+                            //task.ContinueWith(delegate
+                            //{
+                            //    sc.Post(delegate {
+                            //        vm.LoadingVisibility = Visibility.Collapsed;
 
-                                    if (!task.Result)
-                                    {
-                                        MessageDialog.Show(Properties.Resources.AutomatedChecksControl_btnFileBug_Click_There_was_an_error_identifying_the_created_bug__This_may_occur_if_the_ID_used_to_create_the_bug_is_removed_from_its_AzureDevOps_description__Attachments_have_not_been_uploaded);
-                                        vm.BugId = null;
-                                    }
-                                },null);
-                            });
+                            //        if (!task.Result)
+                            //        {
+                            //            MessageDialog.Show(Properties.Resources.AutomatedChecksControl_btnFileBug_Click_There_was_an_error_identifying_the_created_bug__This_may_occur_if_the_ID_used_to_create_the_bug_is_removed_from_its_AzureDevOps_description__Attachments_have_not_been_uploaded);
+                            //            vm.BugId = null;
+                            //        }
+                            //    },null);
+                            //});
 #pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
                         }
                         catch (Exception)

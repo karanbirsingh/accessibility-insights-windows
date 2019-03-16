@@ -275,7 +275,7 @@ namespace AccessibilityInsights.SharedUx.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void btnFileBug_Click(object sender, RoutedEventArgs e)
+        private /*async*/ void btnFileBug_Click(object sender, RoutedEventArgs e)
         {
             var vm = ((Button)sender).Tag as ScanListViewItemViewModel;
             if (vm.BugId.HasValue)
@@ -318,14 +318,14 @@ namespace AccessibilityInsights.SharedUx.Controls
                         vm.LoadingVisibility = Visibility.Visible;
                         try
                         {
-                            var success = await FileBugAction.AttachBugData(this.EcId, vm.Element.BoundingRectangle, 
-                                vm.Element.UniqueId, newBugId, vm.BugId.Value).ConfigureAwait(false);
-                            if (!success)
-                            {
-                                MessageDialog.Show(Properties.Resources.ScannerResultControl_btnFileBug_Click_There_was_an_error_identifying_the_created_bug_This_may_occur_if_the_ID_used_to_create_the_bug_is_removed_from_its_AzureDevOps_description_Attachments_have_not_been_uploaded);
-                                vm.BugId = null;
-                            }
-                            vm.LoadingVisibility = Visibility.Collapsed;
+                            //var success = await FileBugAction.AttachIssueData(this.EcId, vm.Element.BoundingRectangle, 
+                            //    vm.Element.UniqueId, newBugId, vm.BugId.Value).ConfigureAwait(false);
+                            //if (!success)
+                            //{
+                            //    MessageDialog.Show(Properties.Resources.ScannerResultControl_btnFileBug_Click_There_was_an_error_identifying_the_created_bug_This_may_occur_if_the_ID_used_to_create_the_bug_is_removed_from_its_AzureDevOps_description_Attachments_have_not_been_uploaded);
+                            //    vm.BugId = null;
+                            //}
+                            //vm.LoadingVisibility = Visibility.Collapsed;
                         }
                         catch (Exception)
                         {
