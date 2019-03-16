@@ -87,10 +87,12 @@ namespace AccessibilityInsights.SharedUx.FileBug
 
         public static IIssueResult FileIssueAsync(IssueInformation issueInformation)
         {
-            // I know this blocks the current thread. However there is no way for us to make sure that 
             if (IsEnabled && IsConnected) {
                 // Coding to the agreement that FileIssueAsync will return a kicked off task. 
-                // A little unclear on whether this will block the man thread
+                // This will block the main thread. 
+                // It does seem like we currently block the main thread when we show the win form for azure devops
+                // so keeping it as is till we have a discussion. Check for blocking behavior at that link.
+                // https://github.com/Microsoft/accessibility-insights-windows/blob/master/src/AccessibilityInsights.SharedUx/Controls/HierarchyControl.xaml.cs#L858
                 return IssueReporter.FileIssueAsync(issueInformation).Result;
             }
             return null;
