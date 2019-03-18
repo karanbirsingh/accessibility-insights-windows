@@ -60,18 +60,18 @@ namespace AccessibilityInsights.SharedUx.Controls.SettingsTabs
             issueReportingOption.Content = reporter.ServiceName;
             issueReportingOption.Tag =reporter.StableIdentifier;
             issueReportingOption.Margin = new Thickness(2, 2, 2, 2);
-            issueReportingOption.Checked += IssueReporterChecked;
+            issueReportingOption.Checked += IssueReporterOnChecked;
             return issueReportingOption;
         }
 
-        //AK TODO RENAME THIS
-        private void IssueReporterChecked(object sender, RoutedEventArgs e)
+        private void IssueReporterOnChecked(object sender, RoutedEventArgs e)
         {
             if (issueConfigurationControl != null) {
                 selectServerGrid.Children.Remove(issueConfigurationControl);
                 issueConfigurationControl = null;
                 UpdateSaveButton();
             }
+
             Guid clickedButton  = (Guid)((RadioButton)sender).Tag;
             IssueReporterManager.GetInstance().GetIssueFilingOptionsDict().TryGetValue(clickedButton, out selectedIssueReporter);
             issueConfigurationControl = selectedIssueReporter.RetrieveConfigurationControl(this.UpdateSaveButton);
@@ -117,7 +117,6 @@ namespace AccessibilityInsights.SharedUx.Controls.SettingsTabs
         /// allow them to select their team project / team without having to re-connect.
         public void InitializeView()
         {
-            // TODO - move "chose team project yet" state into server integration
             IReadOnlyDictionary<Guid, IIssueReporting> options = BugReporter.GetIssueReporters();
             availableIssueReporters.Children.Clear();
             Guid selectedGUID = BugReporter.IssueReporting != null ? BugReporter.IssueReporting.StableIdentifier : default(Guid);

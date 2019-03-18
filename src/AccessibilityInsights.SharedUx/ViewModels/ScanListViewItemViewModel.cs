@@ -122,7 +122,7 @@ namespace AccessibilityInsights.SharedUx.ViewModels
         }
 
         /// <summary>
-        /// Bug id of this rule
+        /// Display text for this issue
         /// </summary>
         public string IssueDisplayText
         {

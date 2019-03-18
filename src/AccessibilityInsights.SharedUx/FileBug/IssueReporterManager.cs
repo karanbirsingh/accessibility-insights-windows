@@ -7,6 +7,7 @@ using AccessibilityInsights.SharedUx.Settings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AccessibilityInsights.SharedUx.FileBug
 {
@@ -39,7 +40,7 @@ namespace AccessibilityInsights.SharedUx.FileBug
             var serializedConfigsDict = configs.IssueReporterSerializedConfigs;
             Dictionary<Guid, string> configsDictionary = JsonConvert.DeserializeObject<Dictionary<Guid, string>>(serializedConfigsDict);
 
-            List<IIssueReporting> IssueReportingOptions = Container.GetDefaultInstance().IssueReporting;
+            List<IIssueReporting> IssueReportingOptions = Container.GetDefaultInstance().IssueReporting.ToList();
             foreach (IIssueReporting issueReporter in IssueReportingOptions)
             {
                 try
