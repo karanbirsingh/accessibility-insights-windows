@@ -79,7 +79,7 @@ namespace AccessibilityInsights.SharedUx.FileBug
             SelectedIssueReporterGuid = issueReporterGuid;
             IIssueReporting selectedIssueReporter;
             IssueReportingOptionsDict.TryGetValue(issueReporterGuid, out selectedIssueReporter);
-            BugReporter.IssueReporter = selectedIssueReporter;
+            BugReporter.IssueReporting = selectedIssueReporter;
         }
     }
 

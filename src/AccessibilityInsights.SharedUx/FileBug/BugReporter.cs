@@ -15,17 +15,17 @@ namespace AccessibilityInsights.SharedUx.FileBug
     /// </summary>
     static public class BugReporter
     {
-        public static IIssueReporting IssueReporter { get; set; }
+        public static IIssueReporting IssueReporting { get; set; }
 
         public static bool IsEnabled => (IssueReporterManager.GetInstance().GetIssueFilingOptionsDict() != null && IssueReporterManager.GetInstance().GetIssueFilingOptionsDict().Any());
 
-        public static bool IsConnected => IsEnabled && (IssueReporter == null ? false : IssueReporter.IsConfigured);
+        public static bool IsConnected => IsEnabled && (IssueReporting == null ? false : IssueReporting.IsConfigured);
 
 #pragma warning disable CA1819 // Properties should not return arrays
-        public static byte[] Logo => IsEnabled ? IssueReporter.Logo?.ToArray() : null;
+        public static byte[] Logo => IsEnabled ? IssueReporting.Logo?.ToArray() : null;
 #pragma warning restore CA1819 // Properties should not return arrays
 
-        public static string DisplayName => IsEnabled ? IssueReporter.ServiceName : null;
+        public static string DisplayName => IsEnabled ? IssueReporting.ServiceName : null;
 
         public static Dictionary<Guid, IIssueReporting> GetIssueReporters() {
             return IssueReporterManager.GetInstance().GetIssueFilingOptionsDict();
@@ -34,7 +34,7 @@ namespace AccessibilityInsights.SharedUx.FileBug
         public static Task RestoreConfigurationAsync(string serializedConfig)
         {
             if (IsEnabled && IssueReporterManager.SelectedIssueReporterGuid != null)
-                return IssueReporter.RestoreConfigurationAsync(serializedConfig);
+                return IssueReporting.RestoreConfigurationAsync(serializedConfig);
             return Task.CompletedTask;
         }
 
@@ -44,7 +44,7 @@ namespace AccessibilityInsights.SharedUx.FileBug
             IReadOnlyDictionary<Guid, IIssueReporting> issuReporterss= GetIssueReporters();
             IIssueReporting x;
             issuReporterss.TryGetValue(issueReporterGuid, out x);
-            IssueReporter = x;
+            IssueReporting = x;
         }
 
         //public static Task<int?> AttachTestResultToBugAsync(string path, int bugId)
@@ -79,7 +79,7 @@ namespace AccessibilityInsights.SharedUx.FileBug
                 // It does seem like we currently block the main thread when we show the win form for azure devops
                 // so keeping it as is till we have a discussion. Check for blocking behavior at that link.
                 // https://github.com/Microsoft/accessibility-insights-windows/blob/master/src/AccessibilityInsights.SharedUx/Controls/HierarchyControl.xaml.cs#L858
-                return IssueReporter.FileIssueAsync(issueInformation).Result;
+                return IssueReporting.FileIssueAsync(issueInformation).Result;
             }
             return null;
         }
