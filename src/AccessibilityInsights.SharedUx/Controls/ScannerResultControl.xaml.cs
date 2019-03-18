@@ -9,7 +9,6 @@ using AccessibilityInsights.SharedUx.Controls.CustomControls;
 using AccessibilityInsights.SharedUx.Dialogs;
 using AccessibilityInsights.SharedUx.FileBug;
 using AccessibilityInsights.SharedUx.Settings;
-using AccessibilityInsights.SharedUx.Utilities;
 using AccessibilityInsights.SharedUx.ViewModels;
 using System;
 using System.Collections.Generic;

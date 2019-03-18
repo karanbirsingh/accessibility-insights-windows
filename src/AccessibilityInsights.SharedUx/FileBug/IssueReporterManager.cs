@@ -1,12 +1,12 @@
-﻿using AccessibilityInsights.Extensions;
-using AccessibilityInsights.Extensions.Interfaces.BugReporting;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using AccessibilityInsights.Extensions;
 using AccessibilityInsights.Extensions.Interfaces.IssueReporting;
 using AccessibilityInsights.SharedUx.Controls.SettingsTabs;
 using AccessibilityInsights.SharedUx.Settings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace AccessibilityInsights.SharedUx.FileBug
 {
@@ -62,6 +62,7 @@ namespace AccessibilityInsights.SharedUx.FileBug
                     Console.WriteLine("Found duplicate extensions" + ex.StackTrace);
                 }
             }
+
             TestIssueProvider TIP = new TestIssueProvider();
             IssueReportingOptionsDict.Add(TIP.StableIdentifier, TIP);
 

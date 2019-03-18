@@ -718,11 +718,7 @@ namespace AccessibilityInsights
                 Dictionary<Guid, string> configsDictionary = JsonConvert.DeserializeObject<Dictionary<Guid, string>>(serializedConfigsDict);
                 configsDictionary.TryGetValue(selectedIssueReporterGuid, out string serializedConfig);
                 BugReporter.RestoreConfigurationAsync(serializedConfig);
-                //HandleLoginRequest(null, false, null);
             }
-            //Dictionary<string, string> configs = new Dictionary<string, string>() { { "Ashwin", "hello world"} };
-            //string serializedConfig = JsonConvert.SerializeObject(configs);
-            //callback?.Invoke();
         }
 
         #endregion

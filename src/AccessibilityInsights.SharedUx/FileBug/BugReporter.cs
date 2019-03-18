@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using AccessibilityInsights.Extensions;
-using AccessibilityInsights.Extensions.Interfaces.BugReporting;
 using AccessibilityInsights.Extensions.Interfaces.IssueReporting;
 using System;
 using System.Collections.Generic;
@@ -38,39 +36,6 @@ namespace AccessibilityInsights.SharedUx.FileBug
             return Task.CompletedTask;
         }
 
-        // this should move to the issue reporter
-        public static void SetSelectedIssueReporter(Guid issueReporterGuid) {
-            IssueReporterManager.SelectedIssueReporterGuid = issueReporterGuid;
-            IReadOnlyDictionary<Guid, IIssueReporting> issuReporterss= GetIssueReporters();
-            IIssueReporting x;
-            issuReporterss.TryGetValue(issueReporterGuid, out x);
-            IssueReporting = x;
-        }
-
-        //public static Task<int?> AttachTestResultToBugAsync(string path, int bugId)
-        //{
-        //    if (IsEnabled)
-        //        //return IssueReporter.AttachTestResultToBugAsync(path, bugId);
-
-        //    return Task.FromResult((int?)null);
-        //}
-
-        //public static Task<string> AttachScreenshotToBugAsync(string path, int bugId)
-        //{
-        //    if (IsEnabled)
-        //        //return IssueReporter.AttachScreenshotToBugAsync(path, bugId);
-
-        //    return Task.FromResult(string.Empty);
-        //}
-
-        //public static Task<Uri> GetExistingBugUriAsync(int bugId)
-        //{
-        //    if (IsEnabled)
-        //        //return IssueReporter.GetExistingBugUriAsync(bugId);
-
-        //    return Task.FromResult((Uri)null);
-        //}
-
         public static IIssueResult FileIssueAsync(IssueInformation issueInformation)
         {
             if (IsEnabled && IsConnected) {
@@ -83,29 +48,5 @@ namespace AccessibilityInsights.SharedUx.FileBug
             }
             return null;
         }
-
-        //public static IConnectionInfo CreateConnectionInfo(Uri serverUri, IProject project, ITeam team)
-        //{
-        //    if (IsEnabled)
-        //        return IssueReporter.CreateConnectionInfo(serverUri, project, team);
-
-        //    return null;
-        //}
-
-        //public static IConnectionInfo CreateConnectionInfo(string configString)
-        //{
-        //    if (IsEnabled)
-        //        return IssueReporter.CreateConnectionInfo(configString);
-
-        //    return null;
-        //}
-
-        //public static IConnectionCache CreateConnectionCache(string configString)
-        //{
-        //    if (IsEnabled)
-        //        return IssueReporter.CreateConnectionCache(configString);
-
-        //    return null;
-        //}
     }
 }
