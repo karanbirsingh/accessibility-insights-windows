@@ -11,6 +11,7 @@
              xmlns:local="clr-namespace:AccessibilityInsights.SharedUx.Controls"
              xmlns:converters="clr-namespace:AccessibilityInsights.SharedUx.Converters"
              xmlns:Properties="clr-namespace:AccessibilityInsights.SharedUx.Properties"
+             xmlns:customcontrols="clr-namespace:AccessibilityInsights.SharedUx.Controls.CustomControls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="310"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
@@ -129,7 +130,7 @@
                 </Button.ToolTip>
                 <controls:FabricIconControl GlyphName="Settings" GlyphSize="Custom" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ResourceKey=IconBrush}"/>
                 <Button.ContextMenu>
-                    <ContextMenu FlowDirection="LeftToRight">
+                    <ContextMenu FlowDirection="LeftToRight" x:Name="cmTreeView">
                         <MenuItem Header="Tree view" FontWeight="Bold" IsEnabled="False" IsCheckable="True"/>
                         <MenuItem x:Name="mniRaw" IsCheckable="False" Click="mniRaw_Click"
                                   AutomationProperties.Name="{x:Static Properties:Resources.mniRawAutomationPropertiesName1}">
@@ -149,10 +150,9 @@
                                 <RadioButton x:Name="rbContent" Content="Con_tent" Loaded="mniContent_Loaded" Click="rbContent_Click" Focusable="False" />
                             </MenuItem.Header>
                         </MenuItem>
-                        <Separator/>
                         <MenuItem Header="Show _Ancestry" x:Name="mniShowAncestry" IsCheckable="True" 
                                   Loaded="mniShowAncestry_Loaded" Click="mniShowAncestry_Click"/>
-                        <MenuItem Header="Show _Uncertain results" x:Name="mniShowUncertain" IsCheckable="True" 
+                        <customcontrols:MenuItemControlElementByVisibility Header="Show _Uncertain results" x:Name="mniShowUncertain" IsCheckable="True" 
                                   Click="mniShowUncertain_Click" Loaded="mniShowUncertain_Loaded"/>
                     </ContextMenu>
                 </Button.ContextMenu>

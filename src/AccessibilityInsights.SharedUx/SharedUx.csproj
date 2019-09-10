@@ -325,6 +325,7 @@
       <DependentUpon>ChannelConfigControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomControls\CustomDataGrid.cs" />
+    <Compile Include="Controls\CustomControls\MenuItemControlElementByVisibility.cs" />
     <Compile Include="Controls\PrivacyLearnMore.xaml.cs">
       <DependentUpon>PrivacyLearnMore.xaml</DependentUpon>
     </Compile>
