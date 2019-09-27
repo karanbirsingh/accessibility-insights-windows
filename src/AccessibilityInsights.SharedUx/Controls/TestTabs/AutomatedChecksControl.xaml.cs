@@ -39,7 +39,7 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
         /// <summary>
         /// This width will limit the element path column to approx. 75 chars
         /// </summary>
-        const int MaxElemPathColWidth = 360;
+        //const int MaxElemPathColWidth = 360;
 
         /// <summary>
         /// Tracks if all groups are expanded
@@ -312,7 +312,7 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
                     this.lblNoFail.Visibility = Visibility.Collapsed;
                     this.gdFailures.Visibility = Visibility.Collapsed;
                     this.DataContext = ec.DataContext;
-                    this.chbxSelectAll.IsEnabled = ScreenshotAvailable;
+                    //this.chbxSelectAll.IsEnabled = ScreenshotAvailable;
                     this.lvResults.ItemsSource = null;
                     this.ElementContext = ec;
                     this.tbGlimpse.Text = "Target: " + ec.Element.Glimpse;
@@ -337,9 +337,9 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
             this.lblNoFail.Visibility = Visibility.Collapsed;
             this.gdFailures.Visibility = Visibility.Collapsed;
             this.AllExpanded = false;
-            fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidRight;
+            //fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidRight;
             this.SelectedItems.Clear();
-            this.chbxSelectAll.IsChecked = false;
+            //this.chbxSelectAll.IsChecked = false;
             HollowHighlightDriver.GetDefaultInstance().Clear();
 
             if (this.DataContext != null)
@@ -388,12 +388,12 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
             this.AllExpanded = !this.AllExpanded;
             if (this.AllExpanded)
             {
-                fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidDown;
+                //fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidDown;
 
             }
             else
             {
-                fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidRight;
+                //fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidRight;
             }
             ExpandAllExpanders(lvResults);
         }
@@ -440,7 +440,7 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
         {
             this.AllExpanded = false;
-            fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidRight;
+            //fabicnExpandAll.GlyphName = CommonUxComponents.Controls.FabricIcon.CaretSolidRight;
         }
 
         /// <summary>
@@ -746,15 +746,15 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
         {
             if (SelectedItems.Count == 0)
             {
-                chbxSelectAll.IsChecked = false;
+                //chbxSelectAll.IsChecked = false;
             }
             else if (SelectedItems.Count == lvResults.Items.Count)
             {
-                chbxSelectAll.IsChecked = true;
+                //chbxSelectAll.IsChecked = true;
             }
             else
             {
-                chbxSelectAll.IsChecked = null;
+                //chbxSelectAll.IsChecked = null;
             }
         }
 
@@ -951,10 +951,10 @@ namespace AccessibilityInsights.SharedUx.Controls.TestTabs
         /// <param name="e"></param>
         private void CustomGridViewColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.NewSize.Width > MaxElemPathColWidth && Double.IsNaN(gvcElement.Width))
-            {
-                gvcElement.Width = MaxElemPathColWidth;
-            }
+            //if (e.NewSize.Width > MaxElemPathColWidth && Double.IsNaN(gvcElement.Width))
+            //{
+            //    gvcElement.Width = MaxElemPathColWidth;
+            //}
         }
 
         /// <summary>
