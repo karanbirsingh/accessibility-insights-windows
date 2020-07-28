@@ -1,0 +1,27 @@
+name: $(date:yyyy-MM-dd)$(rev:.rr)
+trigger: none
+pr: none
+variables:
+  BuildPlatform: 'x86'
+  MAICreateNuget: 'true'
+  PublicRelease: 'false'
+  SignAppForRelease: 'false'
+
+jobs:
+- template: build-and-unit-tests.yml
+  parameters:
+    configuration: release
+    checkLicenseHeaders: true
+    runComponentGovernance: $[in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI')]
+
+- template: build-and-unit-tests.yml
+  parameters:
+    configuration: debug
+
+- template: ui-test-job.yml
+  parameters:
+    configuration: release
+
+- template: ui-test-job.yml
+  parameters:
+    configuration: debug
