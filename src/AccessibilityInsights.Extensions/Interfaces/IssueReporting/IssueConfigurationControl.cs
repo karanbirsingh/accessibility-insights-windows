@@ -14,6 +14,7 @@ namespace AccessibilityInsights.Extensions.Interfaces.IssueReporting
         ///  To be called to enable the save button in AI-WIN. Will be passed in.
         /// </summary>
         public abstract Action UpdateSaveButton { get; set; }
+        public abstract Action<string, IHideLoadingNotifier> ShowLoadingControl { get; set; }
 
         /// <summary>
         /// Can the save button be clicked

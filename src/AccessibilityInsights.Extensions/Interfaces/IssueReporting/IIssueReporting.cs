@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace AccessibilityInsights.Extensions.Interfaces.IssueReporting
 {
+    public interface IHideLoadingNotifier
+    {
+        event EventHandler HideLoadingControl;
+    }
+
     public interface IIssueReporting
     {
         /// <summary>
@@ -54,7 +59,7 @@ namespace AccessibilityInsights.Extensions.Interfaces.IssueReporting
         /// Control to let user configure/login to issue reporting service. 
         /// UpdateSaveButton action needs to be called when the extension is ready to save.
         /// </summary>
-        IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton);
+        IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton, Action<string, IHideLoadingNotifier> ShowLoadingControl);
 
         /// <summary>
         /// Files an issue

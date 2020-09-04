@@ -29,6 +29,7 @@ namespace AccessibilityInsights.SharedUx.Controls.SettingsTabs
         /// Delegates
         /// </summary>
         public Action UpdateSaveButton { get; set; }
+        public Action<string, IHideLoadingNotifier> ShowLoadingControl { get; set; }
         public Action<bool> ShowSaveButton { get; set; }
 
         IssueConfigurationControl issueConfigurationControl;
@@ -61,7 +62,7 @@ namespace AccessibilityInsights.SharedUx.Controls.SettingsTabs
             if (clickedOptionTag != Guid.Empty)
             {
                 IssueReporterManager.GetInstance().GetIssueFilingOptionsDict().TryGetValue(clickedOptionTag, out selectedIssueReporter);
-                issueConfigurationControl = selectedIssueReporter?.RetrieveConfigurationControl(this.UpdateSaveButton);
+                issueConfigurationControl = selectedIssueReporter?.RetrieveConfigurationControl(this.UpdateSaveButton, this.ShowLoadingControl);
                 Grid.SetRow(issueConfigurationControl, 3);
                 issueFilingGrid.Children.Add(issueConfigurationControl);
             }
@@ -148,7 +149,7 @@ namespace AccessibilityInsights.SharedUx.Controls.SettingsTabs
                 if (selectedGUID.Equals(reporter.Key))
                 {
                     rb.IsChecked = true;
-                    issueConfigurationControl = reporter.Value.RetrieveConfigurationControl(this.UpdateSaveButton);
+                    issueConfigurationControl = reporter.Value.RetrieveConfigurationControl(this.UpdateSaveButton, this.ShowLoadingControl);
                     Grid.SetRow(issueConfigurationControl, 3);
                     if (!issueFilingGrid.Children.Contains(issueConfigurationControl))
                     {

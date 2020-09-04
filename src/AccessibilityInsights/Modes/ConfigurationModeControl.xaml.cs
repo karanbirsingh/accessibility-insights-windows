@@ -239,6 +239,15 @@ namespace AccessibilityInsights.Modes
         {
             this.appSettingsCtrl.UpdateSaveButton = UpdateSaveButtonState;
             this.connectionCtrl.UpdateSaveButton = UpdateSaveButtonState;
+            this.connectionCtrl.ShowLoadingControl = (text, hideHandler) =>
+            {
+                var loadingWindow = new LoadingWindowNonBlocking();
+                hideHandler.HideLoadingControl += (s, e) =>
+                {
+                    MainWin.ctrlDialogContainer.HideControl(loadingWindow);
+                };
+                MainWin.ctrlDialogContainer.Show(loadingWindow);
+            };
             this.connectionCtrl.ShowSaveButton = ShowSaveButton;
 
             UpdateUIFromConfig();

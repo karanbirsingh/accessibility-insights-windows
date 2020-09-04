@@ -102,9 +102,10 @@ namespace AccessibilityInsights.Extensions.GitHub
             }
         }
 
-        public IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton)
+        public IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton, Action<string, IHideLoadingNotifier> ShowLoadingControl)
         {
             this.ConfigurationControl.UpdateSaveButton = UpdateSaveButton;
+            this.ConfigurationControl.ShowLoadingControl = ShowLoadingControl;
             return ConfigurationControl;
         }
 

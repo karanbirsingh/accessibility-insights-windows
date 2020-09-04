@@ -29,7 +29,7 @@ namespace AccessibilityInsights.Modes
             return new CustomControlOverridingAutomationPeer(this, Properties.Resources.LocalizedControlType_Page);
         }
 
-        private void HideControl(ContainedDialog dialog) => Dispatcher.Invoke(() =>
+        public void HideControl(ContainedDialog dialog) => Dispatcher.Invoke(() =>
         {
             if (gdContainer.Children.Contains(dialog))
             {
@@ -56,6 +56,16 @@ namespace AccessibilityInsights.Modes
             ShowControl(containedDialog);
 
             return await containedDialog.ShowDialog(HideControl).ConfigureAwait(false);
+        }
+
+        public void Show(ContainedDialog containedDialog)
+        {
+            if (containedDialog == null)
+                throw new ArgumentNullException(nameof(containedDialog));
+
+            ShowControl(containedDialog);
+
+            containedDialog.Show();
         }
     }
 }

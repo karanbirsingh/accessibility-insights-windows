@@ -65,6 +65,11 @@ namespace AccessibilityInsights.SharedUx.Dialogs
             return Task.Run((Func<bool>)WaitAndHide);
         }
 
+        public void Show()
+        {
+            Dispatcher.InvokeAsync(SetFocusOnDefaultControl, DispatcherPriority.Input);
+        }
+
         /// <summary>
         /// Waits for user input and hides dialog once ready
         /// </summary>

@@ -41,6 +41,11 @@ namespace AccessibilityInsights.ExtensionsTests.DummyClasses
             throw new NotImplementedException();
         }
 
+        public IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton, Action<string, IHideLoadingNotifier> ShowLoadingControl)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool TryGetCurrentSerializedSettings(out string settings)
         {
             throw new NotImplementedException();

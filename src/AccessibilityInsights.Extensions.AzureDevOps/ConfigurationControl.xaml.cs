@@ -5,6 +5,7 @@ using AccessibilityInsights.Extensions.AzureDevOps.Models;
 using AccessibilityInsights.Extensions.Helpers;
 using AccessibilityInsights.Extensions.Interfaces.IssueReporting;
 using Microsoft.VisualStudio.Services.Common;
+using SHDocVw;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
     /// Interaction logic for ConfigurationControl.xaml
     /// </summary>
     public partial class ConfigurationControl : IssueConfigurationControl
+
     {
         // This code can't be in a ctor due to initialization order
         private static IDevOpsIntegration AzureDevOps => AzureBoardsIssueReporting.DevOpsIntegration;
@@ -33,6 +35,13 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
         }
 
         private bool canSave;
+
+        private class HideLoadingNotifier : IHideLoadingNotifier
+        {
+            public event EventHandler HideLoadingControl;
+            public void Hide() => HideLoadingControl.Invoke(this, EventArgs.Empty);
+        }
+        private HideLoadingNotifier hideLoadingNotifier = new HideLoadingNotifier();
 
         public override bool CanSave => canSave;
 
@@ -70,6 +79,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
         /// </summary>
         public BindingList<TeamProjectViewModel> projects { get; private set; } = new BindingList<TeamProjectViewModel>();
         public override Action UpdateSaveButton { get; set; }
+        public override Action<string, IHideLoadingNotifier> ShowLoadingControl { get; set; }
 
         #region configuration updating code
         /// <summary>
@@ -262,7 +272,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                 }
 #pragma warning restore CA1031 // Do not catch general exception types
 
-                FireAsyncContentLoadedEvent(AsyncContentLoadedState.Completed);
+                Dispatcher.Invoke(() => FireAsyncContentLoadedEvent(AsyncContentLoadedState.Completed));
             }
             else if (state == ControlState.HasServer)
             {
@@ -358,12 +368,21 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
         /// <param name="starting">whether to start blocking (true) or stop blocking (false)</param>
         private void ToggleLoading(bool starting)
         {
-            InteractionAllowed = !starting;
             Dispatcher.Invoke(() =>
             {
-                this.ctrlProgressRing.IsActive = starting;
-                this.IsEnabled = InteractionAllowed;
+                if (starting)
+                {
+                    if (InteractionAllowed)
+                        this.ShowLoadingControl("Loading team projects...", hideLoadingNotifier);
+                }
+                else
+                {
+                    hideLoadingNotifier.Hide();
+                }
+                // this.ctrlProgressRing.IsActive = starting;
+                // this.IsEnabled = InteractionAllowed;
             });
+            InteractionAllowed = !starting;
         }
 
         /// <summary>

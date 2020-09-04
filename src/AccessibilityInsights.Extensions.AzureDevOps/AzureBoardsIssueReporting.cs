@@ -121,9 +121,10 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
             });
         }
 
-        public IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton)
+        public IssueConfigurationControl RetrieveConfigurationControl(Action UpdateSaveButton, Action<string, IHideLoadingNotifier> ShowLoadingControl)
         {
             ConfigurationControl.UpdateSaveButton = UpdateSaveButton;
+            ConfigurationControl.ShowLoadingControl = ShowLoadingControl;
             return ConfigurationControl;
         }
 

@@ -14,6 +14,8 @@ namespace AccessibilityInsights.Extensions.GitHub
     {
         public ConnectionConfiguration Config { get; set; }
 
+        public override Action<string, IHideLoadingNotifier> ShowLoadingControl { get; set; }
+
         public Action<bool> IsConfigured { get; set; }
 
         public ConfigurationModel()
