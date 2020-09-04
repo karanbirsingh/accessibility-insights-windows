@@ -94,6 +94,22 @@ namespace AccessibilityInsights.SharedUx.Controls
         }
 
         /// <summary>
+        /// Help text for search box
+        /// </summary>
+        public string SearchBoxHelpText
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.textboxSearch.Text))
+                {
+                    return this.IsLiveMode ? Properties.Resources.SetterValueSearchByName : Properties.Resources.SetterValueSearchByString;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public HierarchyControl()
@@ -306,6 +322,7 @@ namespace AccessibilityInsights.SharedUx.Controls
 
                 FireAsyncContentLoadedEvent();
             }
+            this.textboxSearch.SetValue(AutomationProperties.HelpTextProperty, SearchBoxHelpText);
         }
 
         /// <summary>
@@ -423,13 +440,13 @@ namespace AccessibilityInsights.SharedUx.Controls
         /// <param name="e"></param>
         private void mniShowAncestry_Click(object sender, RoutedEventArgs e)
         {
+            SetFocusOnHierarchyTree();
             Configuration.ShowAncestry = this.mniShowAncestry.IsChecked;
             if (this.SelectedElement != null)
             {
                 var dic = new Dictionary<string, string>();
                 this.HierarchyActions.RefreshHierarchy(false);
             }
-            SetFocusOnHierarchyTree();
         }
 
         /// <summary>
@@ -441,7 +458,6 @@ namespace AccessibilityInsights.SharedUx.Controls
         private void mniShowAncestry_Loaded(object sender, RoutedEventArgs e)
         {
             ((MenuItem)sender).IsChecked = Configuration.ShowAncestry;
-            SetFocusOnHierarchyTree();
         }
         #endregion
 
@@ -627,13 +643,13 @@ namespace AccessibilityInsights.SharedUx.Controls
         {
             Configuration.TreeViewMode = mode;
             SetTreeViewModeOnSelectAction(mode);
+            SetFocusOnHierarchyTree();
 
             if (this.SelectedElement != null)
             {
                 // refresh tree automatically.
                 this.HierarchyActions.RefreshHierarchy(true);
             }
-            SetFocusOnHierarchyTree();
         }
 
         private static void SetTreeViewModeOnSelectAction(TreeViewMode mode)

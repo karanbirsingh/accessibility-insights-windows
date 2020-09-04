@@ -61,15 +61,6 @@ namespace AccessibilityInsights.Extensions.AzureDevOps.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dev.azure.com/fabrikam.
-        /// </summary>
-        public static string accountPlaceholderText {
-            get {
-                return ResourceManager.GetString("accountPlaceholderText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to URL format is not valid. Example URL: https://dev.azure.com/fabrikam.
         /// </summary>
         public static string ADO_URL_Fromat_Message {
@@ -142,16 +133,34 @@ namespace AccessibilityInsights.Extensions.AzureDevOps.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter desired Azure Boards link.
+        ///   Looks up a localized string similar to https://dev.azure.com/fabrikam.
         /// </summary>
-        public static string connectionInstrText {
+        public static string ConnectionDescriptionItalicized {
             get {
-                return ResourceManager.GetString("connectionInstrText", resourceCulture);
+                return ResourceManager.GetString("ConnectionDescriptionItalicized", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your desired Azure Boards link.
+        ///   Looks up a localized string similar to Enter desired Azure Boards link (example: .
+        /// </summary>
+        public static string ConnectionDescriptionPrefix {
+            get {
+                return ResourceManager.GetString("ConnectionDescriptionPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ).
+        /// </summary>
+        public static string ConnectionDescriptionSuffix {
+            get {
+                return ResourceManager.GetString("ConnectionDescriptionSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repo link.
         /// </summary>
         public static string ServerComboBoxAutomationPropertiesName {
             get {
@@ -203,6 +212,15 @@ namespace AccessibilityInsights.Extensions.AzureDevOps.Properties {
                 return ResourceManager.GetString("There_was_an_error_identifying_the_created_issue_This_may_occur_if_the_ID_used_to" +
                         "_create_the_issue_is_removed_from_its_Azure_DevOps_description_Attachments_have_" +
                         "not_been_uploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to connect to &apos;{0}&apos;. Please confirm that you have entered the correct Azure Boards link..
+        /// </summary>
+        public static string UnableToConnectFormattedMessage {
+            get {
+                return ResourceManager.GetString("UnableToConnectFormattedMessage", resourceCulture);
             }
         }
     }

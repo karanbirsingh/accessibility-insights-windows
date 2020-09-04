@@ -9,6 +9,7 @@ using SHDocVw;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -163,6 +164,8 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                     else
                     {
                         ToggleLoading(false);
+                        Dispatcher.Invoke(() => MessageDialog.Show(string.Format(CultureInfo.InvariantCulture,
+                            Properties.Resources.UnableToConnectFormattedMessage, serverUri.ToString())));
                         Dispatcher.Invoke(ServerComboBox.Focus);
                     }
                 }
@@ -258,7 +261,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                     ToggleLoading(true);
                     Dispatcher.Invoke(projects.Clear);
                     var newProjectList = await UpdateTeamProjects().ConfigureAwait(true); // need to come back to original UI thread. 
-                    Dispatcher.Invoke(() => newProjectList.ForEach(p => projects.Add(p))); // w/o dispatcher after reconnect leads to exception in master bc collection is modified from diff thread
+                    Dispatcher.Invoke(() => newProjectList.ForEach(p => projects.Add(p)));
                     ToggleLoading(false);
                     Dispatcher.Invoke(() => serverTreeview.ItemsSource = projects);
                 }

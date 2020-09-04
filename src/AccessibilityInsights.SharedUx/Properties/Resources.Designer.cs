@@ -332,24 +332,6 @@ namespace AccessibilityInsights.SharedUx.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File a bug.
-        /// </summary>
-        public static string btnFileBugAutomationPropertiesName1 {
-            get {
-                return ResourceManager.GetString("btnFileBugAutomationPropertiesName1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File a bug.
-        /// </summary>
-        public static string btnFileBugAutomationPropertiesNameTargetValue {
-            get {
-                return ResourceManager.GetString("btnFileBugAutomationPropertiesNameTargetValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to File issue.
         /// </summary>
         public static string btnFileIssueContent {
@@ -729,15 +711,6 @@ namespace AccessibilityInsights.SharedUx.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hover over the element or set keyboard focus to auto detect color contrast ratio..
-        /// </summary>
-        public static string CCToggleToolTip {
-            get {
-                return ResourceManager.GetString("CCToggleToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Do not change channel.
         /// </summary>
         public static string ChangeChannelContainedDialog_BtnExit {
@@ -880,6 +853,15 @@ namespace AccessibilityInsights.SharedUx.Properties {
         public static string ColorChooserAutomationPropertiesName {
             get {
                 return ResourceManager.GetString("ColorChooserAutomationPropertiesName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-detection allows you to evaulate color contrast ratios by hovering over an element or setting the keyboard focus on it..
+        /// </summary>
+        public static string ColorContrast_AutoDetectGuidance {
+            get {
+                return ResourceManager.GetString("ColorContrast_AutoDetectGuidance", resourceCulture);
             }
         }
         
@@ -3472,7 +3454,7 @@ namespace AccessibilityInsights.SharedUx.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search by name and control type..
+        ///   Looks up a localized string similar to Search by name and control type.
         /// </summary>
         public static string SetterValueSearchByName {
             get {
@@ -3481,7 +3463,7 @@ namespace AccessibilityInsights.SharedUx.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search by common string properties and patterns..
+        ///   Looks up a localized string similar to Search by common string properties and patterns.
         /// </summary>
         public static string SetterValueSearchByString {
             get {
