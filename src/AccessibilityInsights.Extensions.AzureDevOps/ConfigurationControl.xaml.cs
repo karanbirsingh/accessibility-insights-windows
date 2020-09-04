@@ -258,7 +258,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                     ToggleLoading(true);
                     Dispatcher.Invoke(projects.Clear);
                     var newProjectList = await UpdateTeamProjects().ConfigureAwait(true); // need to come back to original UI thread. 
-                    newProjectList.ForEach(p => projects.Add(p));
+                    Dispatcher.Invoke(() => newProjectList.ForEach(p => projects.Add(p))); // w/o dispatcher after reconnect leads to exception in master bc collection is modified from diff thread
                     ToggleLoading(false);
                     Dispatcher.Invoke(() => serverTreeview.ItemsSource = projects);
                 }
