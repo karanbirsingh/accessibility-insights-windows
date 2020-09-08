@@ -254,7 +254,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                     Dispatcher.Invoke(() => newProjectList.ForEach(p => projects.Add(p)));
                     ToggleLoading(false);
                     Dispatcher.Invoke(() => serverTreeview.ItemsSource = projects);
-                    Dispatcher.Invoke(() => serverTreeview.Focus(), System.Windows.Threading.DispatcherPriority.Input);
+                    Dispatcher.Invoke(() => serverTreeview.Focus());
                 }
 #pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception e)
