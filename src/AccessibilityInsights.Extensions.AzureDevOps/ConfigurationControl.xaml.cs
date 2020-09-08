@@ -381,8 +381,6 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                 {
                     hideLoadingNotifier.Hide();
                 }
-                // this.ctrlProgressRing.IsActive = starting;
-                // this.IsEnabled = InteractionAllowed;
             });
             InteractionAllowed = !starting;
         }
