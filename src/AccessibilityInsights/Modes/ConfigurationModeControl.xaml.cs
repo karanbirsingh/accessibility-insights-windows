@@ -241,7 +241,7 @@ namespace AccessibilityInsights.Modes
             this.connectionCtrl.UpdateSaveButton = UpdateSaveButtonState;
             this.connectionCtrl.ShowLoadingControl = (text, hideHandler) =>
             {
-                var loadingWindow = new LoadingWindowNonBlocking();
+                var loadingWindow = new LoadingWindowNonBlocking(text);
                 hideHandler.HideLoadingControl += (s, e) =>
                 {
                     MainWin.ctrlDialogContainer.HideControl(loadingWindow);

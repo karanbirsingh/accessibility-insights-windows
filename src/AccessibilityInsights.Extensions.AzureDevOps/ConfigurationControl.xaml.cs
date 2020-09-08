@@ -263,6 +263,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                     Dispatcher.Invoke(() => newProjectList.ForEach(p => projects.Add(p)));
                     ToggleLoading(false);
                     Dispatcher.Invoke(() => serverTreeview.ItemsSource = projects);
+                    Dispatcher.Invoke(() => serverTreeview.Focus(), System.Windows.Threading.DispatcherPriority.Input);
                 }
 #pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception e)
@@ -375,7 +376,7 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
                 if (starting)
                 {
                     if (InteractionAllowed)
-                        this.ShowLoadingControl("Loading team projects...", hideLoadingNotifier);
+                        this.ShowLoadingControl("Loading team projects. An interactive sign-in dialog may appear.", hideLoadingNotifier);
                 }
                 else
                 {

@@ -20,14 +20,15 @@ namespace AccessibilityInsights.SharedUx.Dialogs
     /// </summary>
     public partial class LoadingWindowNonBlocking : ContainedDialog
     {
-        public LoadingWindowNonBlocking()
+        public LoadingWindowNonBlocking(string loadingText)
         {
             InitializeComponent();
+            this.description.Content = loadingText;
         }
 
         protected override void SetFocusOnDefaultControl()
         {
-            this.progress.Focus();
+            this.description.Focus();
         }
     }
 }
