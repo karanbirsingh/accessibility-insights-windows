@@ -5,7 +5,6 @@ using AccessibilityInsights.Extensions.AzureDevOps.Models;
 using AccessibilityInsights.Extensions.Helpers;
 using AccessibilityInsights.Extensions.Interfaces.IssueReporting;
 using Microsoft.VisualStudio.Services.Common;
-using SHDocVw;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
