@@ -172,4 +172,10 @@
     <value>Unable to connect to '{0}'. Please confirm that you have entered the correct Azure Boards link.</value>
     <comment>{0} is the server Uri</comment>
   </data>
+  <data name="ProgressLoadingAutomationHelpText" xml:space="preserve">
+    <value>An interactive sign-in dialog may appear</value>
+  </data>
+  <data name="ProgressLoadingAutomationName" xml:space="preserve">
+    <value>Waiting to connect to Azure Boards</value>
+  </data>
 </root>

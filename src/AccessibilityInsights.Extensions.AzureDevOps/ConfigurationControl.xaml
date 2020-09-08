@@ -162,7 +162,9 @@
                                    Size="25"  
                                    Visibility="Collapsed"
                                    HorizontalAlignment="Center" 
-                                   VerticalAlignment="Center" Grid.Row="0" IsTabStop="True" AutomationProperties.Name="Waiting to connect to Azure DevOps">
+                                   VerticalAlignment="Center" Grid.Row="0" IsTabStop="True" 
+                                   AutomationProperties.Name="{x:Static Properties:Resources.ProgressLoadingAutomationName}"
+                                   AutomationProperties.HelpText="{x:Static Properties:Resources.ProgressLoadingAutomationHelpText}">
         </fabric:ProgressRingControl>
     </Grid>
 </issuereporting:IssueConfigurationControl>

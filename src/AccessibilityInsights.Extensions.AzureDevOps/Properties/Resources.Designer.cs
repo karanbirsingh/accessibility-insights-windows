@@ -160,6 +160,24 @@ namespace AccessibilityInsights.Extensions.AzureDevOps.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An interactive sign-in dialog may appear.
+        /// </summary>
+        public static string ProgressLoadingAutomationHelpText {
+            get {
+                return ResourceManager.GetString("ProgressLoadingAutomationHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to connect to Azure Boards.
+        /// </summary>
+        public static string ProgressLoadingAutomationName {
+            get {
+                return ResourceManager.GetString("ProgressLoadingAutomationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Repo link.
         /// </summary>
         public static string ServerComboBoxAutomationPropertiesName {
