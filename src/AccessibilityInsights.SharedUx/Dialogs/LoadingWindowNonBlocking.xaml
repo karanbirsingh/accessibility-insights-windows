@@ -19,10 +19,9 @@
               Background="{DynamicResource ResourceKey=SecondaryBGBrush}">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="16"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <controls:ProgressRingControl x:Name="progress" Grid.Row="0"/>
-        <Label x:Name="description" Grid.Row="2" Focusable="True" IsTabStop="True" Margin="12px" Style="{DynamicResource lblDark}"/>
+        <Label x:Name="description" Grid.Row="1" Focusable="True" IsTabStop="True" Margin="12px" Style="{DynamicResource lblDark}"/>
     </Grid>
 </dialogs:ContainedDialog>
