@@ -23,7 +23,6 @@ namespace AccessibilityInsights.Extensions.AzureDevOps
     /// Interaction logic for ConfigurationControl.xaml
     /// </summary>
     public partial class ConfigurationControl : IssueConfigurationControl
-
     {
         // This code can't be in a ctor due to initialization order
         private static IDevOpsIntegration AzureDevOps => AzureBoardsIssueReporting.DevOpsIntegration;
